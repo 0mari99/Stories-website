@@ -1,11 +1,10 @@
 const express = require('express')
 var dotenv = require('dotenv').config();
 const app = express();
-// var nano = require('nano')(process.env.baseUrl);
-var nano = require('nano')('http://admin:12345@localhost:5984');
-console.log(nano)
-nano.db.create("tesla");
-var baseDB = nano.db.use("test")
+const nano =  require('nano')(process.env.baseUrl)
+nano.auth("admin", "12345")
+baseDB = nano.use('tesla')
+ 
 const users = []
 app.listen(process.env.port)
 app.post('/users', (req, res) => {
