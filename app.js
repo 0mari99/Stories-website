@@ -13,7 +13,7 @@ const nano =  require('nano')({
       }
     }
   })
-nano.auth("admin", "12345")
+nano.auth( process.env.userDB, process.env.passDB)
 var baseDB = nano.use('tesla')
 var usersDB = nano.use('profiles_db')
 app.listen(process.env.port, () => {
