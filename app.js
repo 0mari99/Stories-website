@@ -1,21 +1,22 @@
 const express = require('express')
 var dotenv = require('dotenv').config();
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const app = express();
-const nano =  require('nano')(process.env.baseUrl)
-nano.auth("admin", "12345")
-baseDB = nano.use('tesla')
- 
-const users = []
-app.listen(process.env.port)
-app.post('/users', (req, res) => {
-    var a ={
-        name: "abdullah"
+app.use(bodyParser.json());
+app.use(cors());
+const nano =  require('nano')({
+    url: process.env.baseUrl,
+    requestDefaults: {
+      pool: {
+        maxSockets: 30
+      }
     }
-    baseDB.insert(a, (err, resp)=> {
-        if(err){
-            console.log(err)
-        }
-        res.json(resp)
-    })
-    // res.json({})
-})
+  })
+nano.auth("admin", "12345")
+var baseDB = nano.use('tesla')
+var usersDB = nano.use('profiles_db')
+app.listen(process.env.port, () => {
+    console.log('Server started on port ' + process.env.port);
+});
+module.exports = app;
