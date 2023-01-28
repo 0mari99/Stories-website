@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express')
-var dotenv = require('dotenv').config();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+var glob = require('glob')
+var path = require('path');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -13,10 +15,11 @@ const nano =  require('nano')({
       }
     }
   })
-nano.auth( process.env.userDB, process.env.passDB)
-var baseDB = nano.use('tesla')
-var usersDB = nano.use('profiles_db')
+nano.auth(process.env.userDB, process.env.passDB)
+global.usersDB = nano.db.use(process.env.usersDB)
 app.listen(process.env.port, () => {
     console.log('Server started on port ' + process.env.port);
 });
-module.exports = app;
+glob.sync('./routes/**/*.js' ).forEach( function(file) {
+  require(path.resolve(file))(app);
+});
