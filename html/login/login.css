@@ -1,0 +1,49 @@
+html, body, html * {
+    font-family: 'Roboto', sans-serif;
+}
+*:focus {
+    outline: none;
+  }
+  
+.login-container{
+    margin-top: 210px;
+    height: auto;
+}
+.input-fields-container {
+    width: 20%;
+    margin: auto;
+    background-color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+}
+.text-field {
+    width: 85%;
+    padding: 5px;
+    height: 30px;
+    display: block;
+    margin: 10px auto;
+    border: 1px solid #dddfe2;
+    color: #1d2129;
+    line-height: 16px;
+}
+.text-field:focus-visible {
+    border-color: #1b74e4;
+    box-shadow: 0 0 0 2px #e7f3ff;
+    caret-color: #1b74e4;
+}
+.text-field::placeholder { 
+    color: #90949c;
+    opacity: 1; 
+}
+.login-button {
+    width: 89%;
+    background-color: #3AB0FF;
+    color: #fff;
+    height: 50px;
+}
+.login-button:hover {
+    cursor: pointer;
+    background-color: #329ce3;
+}
